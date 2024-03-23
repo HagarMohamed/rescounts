@@ -4,6 +4,8 @@ import registerAction from '../../Redux/actions/registerAction';
 import { toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
 import notify from '../useNotifacation';
+import { isEmail } from 'validator';
+import { isValidPhoneNumber } from 'react-phone-number-input';
 
 const RegisterHook = () => {
 
@@ -17,44 +19,91 @@ const RegisterHook = () => {
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
+    const [errors, setErrors] = useState({
+        fNameError : "",
+        lNameError : "",
+        emailError : "",
+        phoneError : "",
+        passwordError : ""
+
+    })
     const [loading, setLoading] = useState(false);
 
     const onChangeFname = (e) =>{
         setFname(e.target.value)
+        setErrors({
+            ...errors,
+             fNameError : ""
+            })
     }
 
     const onChangeLname = (e) =>{
         setLname(e.target.value)
+        setErrors({
+            ...errors,
+             lNameError : ""
+            })
     }
     const onChangeEmail = (e) =>{
         setEmail(e.target.value)
+        setErrors({
+            ...errors,
+             emailError : ""
+            })
+        
     }
     const onChangePhone = (e) =>{
         setPhone(e.target.value)
+        setErrors({
+            ...errors,
+             phoneError : ""
+            })
     }
     const onChangePassword = (e) =>{
         setPassword(e.target.value)
+        setErrors({
+            ...errors,
+             passwordError : ""
+            })
     }
     
 
     const validate = () =>{
+
+        const newError = {};
+        var valid = true;
+
         if(fName === ""){
-            notify("enter the first name", "error")
-            return false
+           newError.fNameError = "The FirstName is required"
+            valid = false;
         }
         if(lName === ""){
-            notify("enter the last name", "error")
-            return false
+            newError.lNameError = "The LastName is required"
+            valid = false;
         }
         if(email === ""){
-            notify("enter the email", "error")
-            return false
+            newError.emailError = "The Email is required"
+            valid = false;
         }
-        if(phone.length <= 10){
-            notify("enter the valid number", "error")
-            return false
+        if(!isEmail(email)){
+            newError.emailError = "The Email is Not valid"
+            valid = false;
         }
-        return true
+        if(password.length < 8){
+            newError.passwordError = "The Password at least 8 character"
+            valid = false;
+        }
+        if(phone === ""){
+            newError.phoneError = "The PhoneNumber is required"
+            valid = false;
+        }
+        if(!isValidPhoneNumber(phone)){
+            newError.phoneError = "The PhoneNumber is Not valid"
+            valid = false;
+        }
+
+        setErrors(newError);
+        return valid;
 
     }
 
@@ -90,7 +139,7 @@ const RegisterHook = () => {
     },[loading])
     
 
-    return [fName, lName, email, phone, password, loading, onChangeFname, 
+    return [fName, lName, email, phone, password, errors, loading, onChangeFname, 
         onChangeLname, onChangeEmail, onChangePhone, onChangePassword, onClick]
 
 }

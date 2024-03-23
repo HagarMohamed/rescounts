@@ -18,6 +18,7 @@ const RegisterPage = () => {
     email,
     phone,
     password,
+    errors,
     loading,
     onChangeFname,
     onChangeLname,
@@ -74,9 +75,9 @@ const RegisterPage = () => {
             onChange={onChangeEmail}
             placeholder="mail@website.com"
             type="text"
-            className="user-input my-3 px-3"
+            className="user-input my-1 px-3"
           />
-
+          {errors.emailError && (<span className="error">{errors.emailError}</span>)}
           <div
             className="d-flex justify-content-between"
             style={{ width: "70%" }}
@@ -90,8 +91,9 @@ const RegisterPage = () => {
                 onChange={onChangeFname}
                 placeholder="Rob"
                 type="text"
-                className="user-input2 my-3 px-3"
+                className="user-input2 my-1 px-3"
               />
+            {errors.fNameError && (<span className="error">{errors.fNameError}</span>)}
             </div>
 
             <div>
@@ -101,8 +103,9 @@ const RegisterPage = () => {
                 onChange={onChangeLname}
                 placeholder="Smith"
                 type="text"
-                className="user-input2 my-3 px-3"
+                className="user-input2 my-1 px-3"
               />
+              {errors.lNameError && (<span className="error">{errors.lNameError}</span>)}
             </div>
           </div>
 
@@ -114,12 +117,13 @@ const RegisterPage = () => {
             onChange={onChangePassword}
             placeholder="min 8 character"
             type="password"
-            className="user-input my-3 px-3"
+            className="user-input my-1 px-3"
           />
+          {errors.passwordError && (<span className="error">{errors.passwordError}</span>)}
           <label className="labelName">City</label>
           <input
             placeholder="Toranto"
-            type="password"
+            type="text"
             className="user-input my-3 px-3"
           />
 
@@ -131,7 +135,7 @@ const RegisterPage = () => {
               <input
                 placeholder="+1"
                 type="text"
-                className="user-input2 my-3 px-3"
+                className="user-input2 my-1 px-3"
               />
             </div>
 
@@ -142,9 +146,11 @@ const RegisterPage = () => {
                 onChange={onChangePhone}
                 placeholder="56248912"
                 type="text"
-                className="user-input2 my-3 px-3"
+                className="user-input2 my-1 px-3"
               />
+              {errors.phoneError && (<div className="error">{errors.phoneError}</div>)}
             </div>
+            
           </div>
 
           <label className="labelName">Salutation</label>
@@ -191,7 +197,7 @@ const RegisterPage = () => {
             Birth Date
           </label>
           <input
-            type="datetime-local"
+            type="date"
             className="user-input"
             id="birthdaytime"
             name="birthdaytime"

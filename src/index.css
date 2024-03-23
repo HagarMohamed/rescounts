@@ -158,7 +158,10 @@ opacity: 1;
   background-color: #E9D023;
   margin-right: 6px;
 }
-
+.error{
+  color : red;
+  font-size: 12px;
+}
 .res{
   width: 75%;
 }

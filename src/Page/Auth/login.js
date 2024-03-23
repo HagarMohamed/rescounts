@@ -10,7 +10,7 @@ import google from "../../Image/google.png";
 import loginHook from "../../Hook/auth/login-hook";
 
 const LoginPage = () => {
-  const [email, password, loading, onChangeEmail, onChangePassword, onClick] =
+  const [email, password, Errors, loading, onChangeEmail, onChangePassword, onClick] =
     loginHook();
 
   return (
@@ -52,8 +52,10 @@ const LoginPage = () => {
             onChange={onChangeEmail}
             placeholder="mail@website.com"
             type="text"
-            className="user-input my-3 px-3"
+            className="user-input px-3"
           />
+          {Errors.emailError && (<span className="error">{Errors.emailError}</span>) }
+
           <label className="labelName my-2">
             password<span className="star">*</span>
           </label>
@@ -64,7 +66,9 @@ const LoginPage = () => {
             type="password"
             className="user-input px-3"
           />
-          <div className="d-flex justify-content-between res my-4">
+          {Errors.passwordError && (<span className="error">{Errors.passwordError}</span>)}
+
+          <div className="d-flex justify-content-between res my-2">
             <div>
               <input type="checkbox" checked="checked" className="check" />
               <span class="checkmark">Remember Me</span>
