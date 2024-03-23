@@ -52,8 +52,8 @@ const RegisterHook = () => {
             })
         
     }
-    const onChangePhone = (e) =>{
-        setPhone(e.target.value)
+    const onChangePhone = (phone) =>{
+        setPhone(phone)
         setErrors({
             ...errors,
              phoneError : ""

@@ -9,7 +9,8 @@ import "react-phone-number-input/style.css";
 import facebook from "../../Image/face.png";
 import apple from "../../Image/apple.png";
 import google from "../../Image/google.png";
-import PhoneInput from "react-phone-number-input";
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 
 const RegisterPage = () => {
   const [
@@ -75,7 +76,7 @@ const RegisterPage = () => {
             onChange={onChangeEmail}
             placeholder="mail@website.com"
             type="text"
-            className="user-input my-1 px-3"
+            className="user-input  px-3"
           />
           {errors.emailError && (<span className="error">{errors.emailError}</span>)}
           <div
@@ -91,7 +92,7 @@ const RegisterPage = () => {
                 onChange={onChangeFname}
                 placeholder="Rob"
                 type="text"
-                className="user-input2 my-1 px-3"
+                className="user-input2  px-3"
               />
             {errors.fNameError && (<span className="error">{errors.fNameError}</span>)}
             </div>
@@ -103,7 +104,7 @@ const RegisterPage = () => {
                 onChange={onChangeLname}
                 placeholder="Smith"
                 type="text"
-                className="user-input2 my-1 px-3"
+                className="user-input2  px-3"
               />
               {errors.lNameError && (<span className="error">{errors.lNameError}</span>)}
             </div>
@@ -117,36 +118,34 @@ const RegisterPage = () => {
             onChange={onChangePassword}
             placeholder="min 8 character"
             type="password"
-            className="user-input my-1 px-3"
+            className="user-input px-3"
           />
           {errors.passwordError && (<span className="error">{errors.passwordError}</span>)}
           <label className="labelName">City</label>
           <input
             placeholder="Toranto"
             type="text"
-            className="user-input my-3 px-3"
+            className="user-input  px-3"
           />
 
-          <div className="d-flex justify-content-between">
-            <div>
+          <div>
+            {/* <div>
               <label className="labelName">
                 Country<span className="star">*</span>
               </label>
-              <input
-                placeholder="+1"
-                type="text"
-                className="user-input2 my-1 px-3"
+              <PhoneInput
+                country={'us'}
+                value={phone}
+                onChange={onChangePhone}
               />
-            </div>
+            </div> */}
 
             <div>
               <label className="labelName">Mobile Number</label>
-              <input
+              <PhoneInput
+                country={'us'}
                 value={phone}
                 onChange={onChangePhone}
-                placeholder="56248912"
-                type="text"
-                className="user-input2 my-1 px-3"
               />
               {errors.phoneError && (<div className="error">{errors.phoneError}</div>)}
             </div>
